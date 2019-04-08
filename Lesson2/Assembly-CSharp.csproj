@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{EBB6E8B4-CA22-CB29-787C-B3C270F5A1E7}</ProjectGuid>
+    <ProjectGuid>{BE8ABD88-30A8-2E79-B058-B91876E78A2E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -72,25 +72,32 @@
     <Compile Include="Assets\Script\Controller\BaseController.cs" />
     <Compile Include="Assets\Script\Controller\FlashlightController.cs" />
     <Compile Include="Assets\Script\Controller\InputController.cs" />
+    <Compile Include="Assets\Script\Controller\WeaponsController.cs" />
     <Compile Include="Assets\Script\Main.cs" />
     <Compile Include="Assets\Script\Object\BaseObjectScene.cs" />
+    <Compile Include="Assets\Script\Object\Bot\Box.cs" />
+    <Compile Include="Assets\Script\Object\Bot\ISetDamage.cs" />
+    <Compile Include="Assets\Script\Object\Weapons\Ammunition.cs" />
     <Compile Include="Assets\Script\Object\Weapons\Automaton.cs" />
+    <Compile Include="Assets\Script\Object\Weapons\Bullet.cs" />
     <Compile Include="Assets\Script\Object\Weapons\Gun.cs" />
+    <Compile Include="Assets\Script\Object\Weapons\ObjectManager.cs" />
     <Compile Include="Assets\Script\Object\Weapons\Weapons.cs" />
+    <Compile Include="Assets\Script\Timer.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -294,19 +301,19 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Unity2GeekBrains/Lesson1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Unity2GeekBrains/Lesson2/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -656,7 +663,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{D24B4967-8902-D6E3-5E59-1AE2BED20742}</Project>
+      <Project>{24D538BE-0318-1913-BAD9-B73BBAF42858}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>

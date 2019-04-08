@@ -6,21 +6,28 @@ namespace ObjectScene
     /// </summary>
     public abstract class Weapons : BaseObjectScene
     {
-        #region Serialize Variable 
-        // Позиция, из которой будут вылетать снаряды
+        #region Serialize Variable
         [SerializeField] protected Transform _gun;
-        // Сила выстрела                
         [SerializeField] protected float _force = 500;
-        // Время задержки между выстрелами           
         [SerializeField] protected float _rechargeTime = 0.2f;
+        // Можно добавить поля, которые хранили бы количество обойм, текущее количество патронов и т.д.
         #endregion
         #region Protected Variable
-        protected bool _fire = true;
-        // Флаг, разрешающий выстрел                                               
+        protected Timer _recharge = new Timer(); // Выделяем память под таймер        
+        protected bool _fire = true;             // Флаг, разрешающий стрелять
         #endregion
         #region Abstract Function
-        // Функция для вызова выстрела, обязательна во всех дочерних классах
-        public abstract void Fire();
+        public abstract void Fire(Ammunition ammunition);
         #endregion
+        protected virtual void Update()
+        {
+            // Тут можно дописать условие: если не выбрано оружие или выбрано не огнестрельное оружие, то не производить подсчеты
+            _recharge.Update();     // Производим подсчеты времени
+            if (_recharge.IsEvent())// Если закончили отсчет, разрешаем стрелять
+            {
+                _fire = true;
+            }
+        }
     }
+
 }
