@@ -13,7 +13,7 @@ namespace ObjectScene
         private InputController _inputController;
         private FlashlightController _flashlightController;
         private static Main _instance;
-        public static Main Instance { get; private set; }
+        public static Main Instance { get => _instance; private set=> _instance=value; }
         void Start()
         {
             _instance = this;
