@@ -23,8 +23,9 @@ namespace ObjectScene.Controller
                     Main.Instance.GetFlashlightController.Off();
                 }
             }
-            // Меняем оружие по нажатию клавиш
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+           
+                // Меняем оружие по нажатию клавиш
+                if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 _indexWeapons = 0;
                 _isSelectWeapons = false;

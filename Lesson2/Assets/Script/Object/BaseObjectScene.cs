@@ -21,7 +21,7 @@ namespace ObjectScene
         protected Rigidbody _rigidbody;
         protected string _name;
         protected bool _isVisible;
-
+        
         //Добавил свойство
         protected Vector3 _velocity; //Силы на обьект
 

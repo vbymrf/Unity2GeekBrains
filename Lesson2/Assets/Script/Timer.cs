@@ -6,9 +6,9 @@ namespace ObjectScene
 {
     public sealed class Timer
     {
-        DateTime _start;
-        float _elapsed = -1;
-        private TimeSpan _duration;
+        DateTime _start; //Время включения таймера
+        float _elapsed = -1;// Подсчитываемое время
+        private TimeSpan _duration;//Временные промежутки
         public void Start(float elapsed)
         {
             _elapsed = elapsed;
