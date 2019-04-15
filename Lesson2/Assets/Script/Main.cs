@@ -34,6 +34,7 @@ namespace ObjectScene
             _flashlightController = _controllersGameObject.AddComponent<FlashlightController>();
             _weaponsController = _controllersGameObject.AddComponent<WeaponsController>();
             _objectManager = _controllersGameObject.AddComponent<ObjectManager>();
+            
         }
 
 
