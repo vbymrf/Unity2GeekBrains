@@ -20,6 +20,8 @@ public class PlayerModel : BaseObjectScene
         private GameObject _gPlayer;
         private GameObject _gCamera;
         private Rigidbody _kRigiBody;
+
+        public bool _IsGrounded = false;
         #endregion
         protected override void Awake()
         {
@@ -31,18 +33,42 @@ public class PlayerModel : BaseObjectScene
             _qOriginalRotation = _gCamera.transform.rotation;
            
         }
-        public void MovePlayer(Vector3 movement)
-         {
-            _kRigiBody.MovePosition(transform.localPosition + movement);
-         }
-        public void JumpPlayer()
-        {
 
+        //private void FixedUpdate()
+        //{
+            
+        //}
+
+        public void MovePlayer(Vector3 movement)
+         {//???  Персонаж падает под землю если не использовать физику (под мостом). По физике не залазиет на подьем
+            //_kRigiBody.AddForce(transform.TransformDirection(movement * 100));// По физике
+            //_kRigiBody.MovePosition(transform.position + transform.TransformDirection(movement));//Непонятно почему вектор перемещения глобальный, не зависит от RigiBody или gameobject вращения и как помогает TransformDirection           
+           _gPlayer.transform.Translate(movement);
+            //Debug.Log("V.x=" + _kRigiBody.velocity.x);
+            //Debug.Log("V.y=" + _kRigiBody.velocity.y);
+            //Debug.Log("V.z=" + _kRigiBody.velocity.z);
+
+        }
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Grounded") _IsGrounded = true;
+           
+        }
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.tag == "Grounded") _IsGrounded = false;
+           
+        }
+        public void JumpPlayer(Vector3 JumpForce)
+        {
+            //Debug.Log(_IsGrounded);// Через некоторое время методы OnCollision перестанут работать. Если не запускается Uodate
+            if (_IsGrounded)
+                _kRigiBody.AddForce((JumpForce*50), ForceMode.Impulse);
         }
         public void RotationPlayer(Quaternion X, Quaternion Y)
         {
             _gCamera.transform.localRotation = _qOriginalRotation * Y;
-            _gPlayer.transform.localRotation = _qOriginalRotation * X;
+            _kRigiBody.transform.localRotation = _qOriginalRotation * X;
         }
 
 }

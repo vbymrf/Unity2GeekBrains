@@ -739,8 +739,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &864998153
-CharacterController:
+--- !u!65 &864998153
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -748,15 +748,10 @@ CharacterController:
   m_GameObject: {fileID: 864998148}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.3, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0.79}
 --- !u!54 &864998154
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -786,6 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fSpeedMopve: 0
+  _IsGrounded: 0
 --- !u!4 &909428838 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4901760066362955003, guid: 5fdab8249a8b81c48a9600a364462767,
@@ -934,6 +930,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GeometryStatic
       objectReference: {fileID: 0}
+    - target: {fileID: 2480451782668463634, guid: 85d958d72791ed8499df3b1165cd4357,
+        type: 3}
+      propertyPath: m_TagString
+      value: Grounded
+      objectReference: {fileID: 0}
     - target: {fileID: 2480451782668463633, guid: 85d958d72791ed8499df3b1165cd4357,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -988,6 +989,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480451782806026493, guid: 85d958d72791ed8499df3b1165cd4357,
+        type: 3}
+      propertyPath: m_TagString
+      value: Grounded
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480451782806026489, guid: 85d958d72791ed8499df3b1165cd4357,
+        type: 3}
+      propertyPath: m_TagString
+      value: Grounded
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480451782806026491, guid: 85d958d72791ed8499df3b1165cd4357,
+        type: 3}
+      propertyPath: m_TagString
+      value: Grounded
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480451782806026495, guid: 85d958d72791ed8499df3b1165cd4357,
+        type: 3}
+      propertyPath: m_TagString
+      value: Grounded
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85d958d72791ed8499df3b1165cd4357, type: 3}

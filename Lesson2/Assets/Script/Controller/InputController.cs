@@ -22,6 +22,7 @@ namespace ObjectScene.Controller
         public float _fMinRotationX = -360;
         //Управление перемещением
         public float _fSpeedMove=5;
+        public float _fJumpMove = 6;
 
         private float _fMouseX=0;
         private float _fMouseY=0;
@@ -31,6 +32,7 @@ namespace ObjectScene.Controller
         private Quaternion _qX;
         private Quaternion _qY;
         private Vector3 _vMove;
+        private Vector3 _vJump;
         private GameObject _gPlayer;       
         private Rigidbody _kRigiBody;
 
@@ -45,7 +47,7 @@ namespace ObjectScene.Controller
             
             if(_kRigiBody) _kRigiBody.freezeRotation = true;//не даем вращаться  обьекту
         }
-
+        
 
         public void FixedUpdate()
         {
@@ -54,7 +56,7 @@ namespace ObjectScene.Controller
             _fMouseX = _fMouseX+ Input.GetAxis("Mouse X") *_fSensitiveX;
             _fMouseY = _fMouseY+ Input.GetAxis("Mouse Y")*_fSensitiveY;
             //Debug.Log("Y1=" + Input.GetAxisRaw("Mouse Y"));
-            //Debug.Log("X1=" + Input.GetAxisRaw("Mouse X"));
+            //Debug.Log("Xr=" + Input.GetAxisRaw("Mouse X"));
             //Debug.Log("Y=" + Input.GetAxis("Mouse Y"));
             //Debug.Log("X=" + Input.GetAxis("Mouse X"));
             _fMouseX = _fMouseX % 360;
@@ -67,15 +69,23 @@ namespace ObjectScene.Controller
             _qY = Quaternion.AngleAxis(_fMouseY, Vector3.left);
 
             _kPlayer.RotationPlayer(_qX, _qY);//Поворачиваем игрока мышью
-
+            
             //Перемещение песонажа
-            _fKeyHorizontal = Input.GetAxisRaw("Horizontal");
-            _fKeyVertical = Input.GetAxisRaw("Vertical");
+            _fKeyHorizontal = Input.GetAxis("Horizontal");
+            _fKeyVertical = Input.GetAxis("Vertical");
+            //Debug.Log("X=" + Input.GetAxis("Horizontal"));
+            //Debug.Log("XR=" + Input.GetAxisRaw("Horizontal"));
             //Debug.Log("X=" + Input.GetAxis("Mouse X"));
             _vMove.Set(_fKeyHorizontal, 0f, _fKeyVertical);
-            _vMove = _vMove.normalized * _fSpeedMove * Time.deltaTime;
+            _vMove = _vMove.normalized * _fSpeedMove * Time.fixedDeltaTime;    
+
             _kPlayer.MovePlayer(_vMove);
-            //_kRigiBody.MovePosition()
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                _vJump = Vector3.up * _fJumpMove * Time.fixedDeltaTime;
+                _kPlayer.JumpPlayer(_vJump);
+            }
 
 
             #endregion
