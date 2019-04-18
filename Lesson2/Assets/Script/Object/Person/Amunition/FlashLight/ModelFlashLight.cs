@@ -19,8 +19,7 @@ public class ModelFlashLight : MonoBehaviour
     private void Awake()
     {
         GetComponentsInChildren<Light>(true,_kLight);    //Привязка Light на дочерних обьектах
-        _kLight.Add(GetComponent<Light>());       //Привязка на обьекте   
-        
+        _kLight.Add(GetComponent<Light>());       //Привязка на обьекте           
     }
    
     public void On()

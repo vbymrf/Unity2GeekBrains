@@ -27,7 +27,7 @@ namespace ObjectScene
         void waitAwake()
         {
             _kFlashlightController = Main.Instance.GetFlashlightController;            
-            _kFlashlightController._eFlashLightUpdate += FillAmountChange;          
+            _kFlashlightController._eFlashLightUpdate += FillAmountChange;
             
         }
         private void OnDestroy()
@@ -42,6 +42,7 @@ namespace ObjectScene
        
         void FillAmountChange(bool enable)
         {
+            //if(_kFlashlightController._kModelFlashLight.Enable==true){}//Можно использовать ссылку на обьект, вместо свойист контроллеров. Недостаток - все равно придется править модель, если нужен обработчик свойства
             _fFillAmount=_kImage.fillAmount = _kFlashlightController._fEnergyAmount/ _kFlashlightController._fMaxEnergyAmount;
             if (enable) _kImage.color = _cOn;
             else _kImage.color = _cOff;

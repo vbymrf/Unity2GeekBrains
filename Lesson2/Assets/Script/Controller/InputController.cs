@@ -54,17 +54,11 @@ namespace ObjectScene.Controller
             #region Управление персонажем
             //Вращение мышью
             _fMouseX = _fMouseX+ Input.GetAxis("Mouse X") *_fSensitiveX;
-            _fMouseY = _fMouseY+ Input.GetAxis("Mouse Y")*_fSensitiveY;
-            //Debug.Log("Y1=" + Input.GetAxisRaw("Mouse Y"));
-            //Debug.Log("Xr=" + Input.GetAxisRaw("Mouse X"));
-            //Debug.Log("Y=" + Input.GetAxis("Mouse Y"));
-            //Debug.Log("X=" + Input.GetAxis("Mouse X"));
+            _fMouseY = _fMouseY+ Input.GetAxis("Mouse Y")*_fSensitiveY;            
             _fMouseX = _fMouseX % 360;
             _fMouseY = _fMouseY % 360;
            _fMouseY = Mathf.Clamp(_fMouseY, _fMinRotationY, _fMaxRotationY);
-           _fMouseX = Mathf.Clamp(_fMouseX, _fMinRotationX, _fMaxRotationX);
-            //Debug.Log("Y=" + _fMouseY);
-            //Debug.Log("X=" + _fMouseX);
+           _fMouseX = Mathf.Clamp(_fMouseX, _fMinRotationX, _fMaxRotationX);           
             _qX = Quaternion.AngleAxis(_fMouseX, Vector3.up);
             _qY = Quaternion.AngleAxis(_fMouseY, Vector3.left);
 
@@ -72,10 +66,7 @@ namespace ObjectScene.Controller
             
             //Перемещение песонажа
             _fKeyHorizontal = Input.GetAxis("Horizontal");
-            _fKeyVertical = Input.GetAxis("Vertical");
-            //Debug.Log("X=" + Input.GetAxis("Horizontal"));
-            //Debug.Log("XR=" + Input.GetAxisRaw("Horizontal"));
-            //Debug.Log("X=" + Input.GetAxis("Mouse X"));
+            _fKeyVertical = Input.GetAxis("Vertical");           
             _vMove.Set(_fKeyHorizontal, 0f, _fKeyVertical);
             _vMove = _vMove.normalized * _fSpeedMove * Time.fixedDeltaTime;    
 

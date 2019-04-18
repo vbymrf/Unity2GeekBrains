@@ -8,7 +8,7 @@ namespace ObjectScene.Controller
     {
         #region Привязанные поля и методы к Модели Фонарика
 
-        private ModelFlashLight _kModelFlashLight; // Ссылка на модель фонарика
+        public ModelFlashLight _kModelFlashLight; // Ссылка на модель фонарика
         
         public bool Enable                           //Включен ли фонарик
         {
