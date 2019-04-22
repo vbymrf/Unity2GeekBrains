@@ -6,6 +6,7 @@ namespace ObjectScene.Controller
     /// </summary>
     public class InputController : BaseController
     {
+      
         #region Фонарик
         private bool _isActiveFlashlight = false;
         private bool _isSelectWeapons = true;
@@ -39,13 +40,23 @@ namespace ObjectScene.Controller
         private PlayerModel _kPlayer;
         #endregion
 
+        #region Смена оружия
+        private float _fChangeWeponsScroll;
+        #endregion
+
         private void Awake()
         {
-            _gPlayer = GameObject.FindGameObjectWithTag("Player");           
+            _gPlayer = Main.Instance._gPerson;         
             _kPlayer= _gPlayer.GetComponent<PlayerModel>();
             _kRigiBody =_gPlayer.GetComponent<Rigidbody>();
             
             if(_kRigiBody) _kRigiBody.freezeRotation = true;//не даем вращаться  обьекту
+            #region Курсор
+            //Cursor.lockState = CursorLockMode.Locked;//Заблокировать в середине - не видим
+            Cursor.visible = false; //Убираем курсор внутри окна игры - так удобнее управлять персонажем и переключать в Unity
+            #endregion
+
+            _fChangeWeponsScroll = 0;
         }
         
 
@@ -53,8 +64,8 @@ namespace ObjectScene.Controller
         {
             #region Управление персонажем
             //Вращение мышью
-            _fMouseX = _fMouseX+ Input.GetAxis("Mouse X") *_fSensitiveX;
-            _fMouseY = _fMouseY+ Input.GetAxis("Mouse Y")*_fSensitiveY;            
+            _fMouseX = _fMouseX+ Input.GetAxis("Mouse X") *_fSensitiveX;  //
+            _fMouseY = _fMouseY+ Input.GetAxis("Mouse Y")*_fSensitiveY;  //          
             _fMouseX = _fMouseX % 360;
             _fMouseY = _fMouseY % 360;
            _fMouseY = Mathf.Clamp(_fMouseY, _fMinRotationY, _fMaxRotationY);
@@ -72,7 +83,7 @@ namespace ObjectScene.Controller
 
             _kPlayer.MovePlayer(_vMove);
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump"))//Прыжок
             {
                 _vJump = Vector3.up * _fJumpMove * Time.fixedDeltaTime;
                 _kPlayer.JumpPlayer(_vJump);
@@ -80,7 +91,41 @@ namespace ObjectScene.Controller
 
 
             #endregion
+            
+            if (Input.GetButton("Fire1") || Input.GetButton("Mouse X") )//Стрельба 
+            {            
+                Main.Instance.GetWeaponsController.Fire();
+            }
+            #region Смена оружия
+                //Debug.Log("ChangeWepons" + Input.GetButtonDown("ChangeWepons"));
+            if (Input.GetButtonDown("ChangeWepons"))//По 2 клавише мышки
+            {                
+                Main.Instance.GetWeaponsController.ChangeWepons();
+            }
 
+            if (Input.GetAxis("Mouse ScrollWheel")!=0)//Меняем оружие по скролу мышки (метод переключенния получился случайно)
+            {//Если повернули колесико и при этом тут же на следующей строчке GetAxis  увеличился и записался в _fChangeWeponsScroll идет переключение. Какое то расхождение контролера клавишь и метода FixedUpdate? ХЗ
+                //Debug.Log("_fChangeWeponsScroll= до" + _fChangeWeponsScroll);
+                //Debug.Log("Mouse ScrollWheel= до" + Input.GetAxis("Mouse ScrollWheel"));
+                _fChangeWeponsScroll += Input.GetAxis("Mouse ScrollWheel");
+                //Debug.Log("_fChangeWeponsScroll= после" + _fChangeWeponsScroll);
+                //Debug.Log("Mouse ScrollWheel= после" + Input.GetAxis("Mouse ScrollWheel"));
+                if (_fChangeWeponsScroll> Input.GetAxis("Mouse ScrollWheel"))
+                {
+                    Main.Instance.GetWeaponsController.ChangeWeponsScroll(true);
+                    //Debug.Log("_fChangeWeponsScroll= +++  " + _fChangeWeponsScroll);
+                    //Debug.Log("Mouse ScrollWheel= +++  " + Input.GetAxis("Mouse ScrollWheel"));
+                }
+                 
+                else
+                {
+                    Main.Instance.GetWeaponsController.ChangeWeponsScroll(false);
+                    //Debug.Log("_fChangeWeponsScroll= ---  " + _fChangeWeponsScroll);
+                    //Debug.Log("Mouse ScrollWheel= ---  " + Input.GetAxis("Mouse ScrollWheel"));
+                }
+                _fChangeWeponsScroll = 0;
+            }
+            #endregion
 
             if (Input.GetKeyDown(KeyCode.F))//Включениеи выключение фонарика
             {
@@ -95,25 +140,25 @@ namespace ObjectScene.Controller
                 }
             }
            
-                // Меняем оружие по нажатию клавиш
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                _indexWeapons = 0;
-                _isSelectWeapons = false;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                _indexWeapons = 1;
-                _isSelectWeapons = false;
-            }
-            // Меняем оружие колесиком        
-            if (_isSelectWeapons) return;
-            if (Main.Instance.GetManagerObject.GetWeaponsList[_indexWeapons])
-            {
-                // Передаем в контроллер стрельбы чем и из чего стрелять
-                Main.Instance.GetWeaponsController.On(Main.Instance.GetManagerObject.GetWeaponsList[_indexWeapons], Main.Instance.GetManagerObject.GetAmmunitionList[_indexWeapons]);
-            }
-            _isSelectWeapons = true;
+            //    // Меняем оружие по нажатию клавиш
+            //    if (Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    _indexWeapons = 0;
+            //    _isSelectWeapons = false;
+            //}
+            //if (Input.GetKeyDown(KeyCode.Alpha2))
+            //{
+            //    _indexWeapons = 1;
+            //    _isSelectWeapons = false;
+            //}
+            //// Меняем оружие колесиком        
+            //if (_isSelectWeapons) return;
+            //if (Main.Instance.GetManagerObject.GetWeaponsList[_indexWeapons])
+            //{
+            //    // Передаем в контроллер стрельбы чем и из чего стрелять
+            //    Main.Instance.GetWeaponsController.On(Main.Instance.GetManagerObject.GetWeaponsList[_indexWeapons], Main.Instance.GetManagerObject.GetAmmunitionList[_indexWeapons]);
+            //}
+            //_isSelectWeapons = true;
         }
     }
 

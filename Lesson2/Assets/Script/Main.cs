@@ -9,16 +9,23 @@ namespace ObjectScene
     /// </summary>
     public sealed class Main : MonoBehaviour
     {
+        private static Main _instance;
+        public static Main Instance { get => _instance; private set=> _instance=value; }
+
+        public GameObject _gPerson;
+
         private GameObject _controllersGameObject;
         private InputController _inputController;
         private FlashlightController _flashlightController;
-        private static Main _instance;
-        public static Main Instance { get => _instance; private set=> _instance=value; }
+        
         private WeaponsController _weaponsController;
         private ObjectManager _objectManager;
-        
 
-         
+        private void Awake()
+        {
+            _gPerson = GameObject.FindGameObjectWithTag("Player");
+        }
+
         public enum MouseButton
         {
             LeftButton,

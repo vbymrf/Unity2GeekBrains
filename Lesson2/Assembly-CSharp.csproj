@@ -179,6 +179,7 @@
     <Compile Include="Assets\Script\Object\Person\Amunition\FlashLight\UIflashLight.cs" />
     <Compile Include="Assets\Script\Object\Person\Amunition\Gun\Automaton.cs" />
     <Compile Include="Assets\Script\Object\Person\Amunition\Gun\Gun.cs" />
+    <Compile Include="Assets\Script\Object\Person\Amunition\Gun\UIAmmo.cs" />
     <Compile Include="Assets\Script\Object\Person\Amunition\Weapons.cs" />
     <Compile Include="Assets\Script\Object\Person\ObjectManager.cs" />
     <Compile Include="Assets\Script\Object\Person\PlayerModel.cs" />

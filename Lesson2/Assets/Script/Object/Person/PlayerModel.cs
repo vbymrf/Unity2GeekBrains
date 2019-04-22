@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ObjectScene { 
 public class PlayerModel : BaseObjectScene
     {
-        public float _fDistanceFeet;
+        public float _fDistanceFeet=1;//Расстояние до земли от центра персонажа
 
         private Quaternion _qOriginalRotation;
         private RaycastHit[] _rmJumpCollision;
@@ -20,13 +20,14 @@ public class PlayerModel : BaseObjectScene
             base.Awake();
             _gPlayer = GameObject.FindGameObjectWithTag("Player");
             _gCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            GetComponent<BoxCollider2D>().enabled = true;
+            
 
             _kRigiBody = _gPlayer.GetComponent<Rigidbody>();
             _qOriginalRotation = _gCamera.transform.rotation;
 
-           
-        }
+            _fDistanceFeet = 1;//Задаем расстояние. На которое быдем искать землю под ногами.
+
+    }
 
      
         public void MovePlayer(Vector3 movement)
