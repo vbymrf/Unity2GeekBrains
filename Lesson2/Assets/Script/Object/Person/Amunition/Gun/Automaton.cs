@@ -10,7 +10,8 @@ namespace ObjectScene
     {
         public Ammunition _GpBullet;
         public GameObject _GsPointWepons;
-        public override float _fCountAmmo { get; set; } = 30;//Патронов в магазине
+        public override float _fCountAmmo { get; set; } = 30;//Максимальнтое патронов в магазине
+        public  override float _fCountAmmoNow { get; set; } = 30;//Патронов в магазине сейчас
 
         public GameObject _GsAnimationObject;//Обьект отыгрывания полета патронов из магазина
 

@@ -12,36 +12,34 @@ namespace ObjectScene
         private static Main _instance;
         public static Main Instance { get => _instance; private set=> _instance=value; }
 
-        public GameObject _gPerson;
+        public  GameObject _gPerson;
 
-        private GameObject _controllersGameObject;
-        private InputController _inputController;
-        private FlashlightController _flashlightController;
         
+        public  GameObject _controllersGameObject { get; private set; }
+
+        private InputController _inputController;
+        private FlashlightController _flashlightController;        
         private WeaponsController _weaponsController;
         private ObjectManager _objectManager;
 
         private void Awake()
-        {
+        {            
             _gPerson = GameObject.FindGameObjectWithTag("Player");
         }
 
-        public enum MouseButton
-        {
-            LeftButton,
-            RightButton,
-            CenterButton
-        }
+        
 
         void Start()
         {
-            _instance = this;
-            _controllersGameObject = new GameObject { name = "Controllers" };
-            _inputController = _controllersGameObject.AddComponent<InputController>();
-            _flashlightController = _controllersGameObject.AddComponent<FlashlightController>();
-            _weaponsController = _controllersGameObject.AddComponent<WeaponsController>();
-            _objectManager = _controllersGameObject.AddComponent<ObjectManager>();
-            
+            if (Instance) DestroyImmediate(gameObject); //Здесь мы говорим, что нельзя использовать больше одного Main
+            else _instance = this;           
+
+                _controllersGameObject = new GameObject { name = "Controllers" };
+                _inputController = _controllersGameObject.AddComponent<InputController>();
+                _flashlightController = _controllersGameObject.AddComponent<FlashlightController>();
+                _weaponsController = _controllersGameObject.AddComponent<WeaponsController>();
+                _objectManager = _controllersGameObject.AddComponent<ObjectManager>();
+           
         }
 
 

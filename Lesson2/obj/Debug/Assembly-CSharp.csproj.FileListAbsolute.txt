@@ -282,3 +282,4 @@ C:\Unity2GeekBrains\Lesson2\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.c
 C:\Unity2GeekBrains\Lesson2\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Unity2GeekBrains\Lesson2\obj\Debug\Assembly-CSharp.dll
 C:\Unity2GeekBrains\Lesson2\obj\Debug\Assembly-CSharp.pdb
+C:\Unity2GeekBrains\Lesson2\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

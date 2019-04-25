@@ -10,6 +10,9 @@ namespace ObjectScene
     {
 
         public Weapons _kWepons;
+        /// <summary>
+        /// Попали пулей?
+        /// </summary>
         private RaycastHit _rHit;
         private Vector3 _vNextPosition;
 

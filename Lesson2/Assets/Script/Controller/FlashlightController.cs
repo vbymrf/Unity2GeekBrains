@@ -4,6 +4,9 @@ using System;
 using System.Collections;
 namespace ObjectScene.Controller
 {
+    /// <summary>
+    /// Контроллер фонарика
+    /// </summary>
     public sealed class FlashlightController : BaseController
     {
         #region Привязанные поля и методы к Модели Фонарика

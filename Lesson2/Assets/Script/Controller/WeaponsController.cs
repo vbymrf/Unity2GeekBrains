@@ -1,18 +1,24 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace ObjectScene.Controller
 {
+    public delegate bool Predicate<T>(T a) ;
+    public delegate void Action();
     /// <summary>
-    /// Класс оружия, из которого выходят снаряды
+    /// Контроллер оружия для стрельбы
     /// </summary>
     public class WeaponsController : BaseController
 {
+        #region Точка привязки к оружию
         public Weapons[] _kmWepons;
         public int _iCurentWepons=0;
-
-        public bool _IsRechargeWeapons { get; set; }
-        public float _fCountAmmo { get; set; }
+        #endregion
+        /// <summary>
+        /// Если стреляем или перезаряжаем запустить
+        /// </summary>        
+        public event Action<Weapons> _eIsOnGetWepons; 
 
         //public enum 
 
@@ -23,10 +29,13 @@ namespace ObjectScene.Controller
             {
                 _kmWepons[i]._IsVisible = i == _iCurentWepons;
             }
+            //_eIsOnGetWepons+= delegate { };//Пустой метод на событие, что бы не вызывала ошибок
         }
         private void FixedUpdate()
         {
-            
+            if (_kmWepons[_iCurentWepons] == null) return;
+            if (_kmWepons[_iCurentWepons]._IsFire || _kmWepons[_iCurentWepons]._IsRecharge) _eIsOnGetWepons?.Invoke(_kmWepons[_iCurentWepons]);
+
         }
 
 

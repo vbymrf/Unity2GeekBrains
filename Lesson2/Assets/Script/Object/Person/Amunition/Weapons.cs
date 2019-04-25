@@ -27,9 +27,13 @@ namespace ObjectScene
         /// </summary>
         public float _fTimeBetweenFire;
         /// <summary>
-        /// Количество патронов в магазине
+        /// Максимальное количество патронов в магазине
         /// </summary>
         public abstract float _fCountAmmo { get; set; }
+        /// <summary>
+        /// Количество доступных патронов в магазине оружие
+        /// </summary>
+        public abstract float _fCountAmmoNow { get; set; }
         /// <summary>
         /// Сейчас стреляем?
         /// </summary>
