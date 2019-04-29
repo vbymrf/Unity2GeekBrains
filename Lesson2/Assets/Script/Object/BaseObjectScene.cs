@@ -44,8 +44,10 @@ namespace ObjectScene
             set
             {
                 IsVisibleP = value;
+                this.enabled = value;//Отключам сам скрипт - компонент. Т.к. будут работать все циклы в нем, что не желательно. Сколько их, столько и будут работать.
+               
                 if (_gObject.GetComponent<MeshRenderer>())
-                    _gObject.GetComponent<MeshRenderer>().enabled = IsVisibleP; //Из методички оставил на будущее, но слишком много не нужного кода
+                    _gObject.GetComponent<MeshRenderer>().enabled = IsVisibleP; //Из методички оставил на будущее, но слишком много не нужного кода, т.к. все это Renderer
                 if (_gObject.GetComponent<SkinnedMeshRenderer>())
                     _gObject.GetComponent<SkinnedMeshRenderer>().enabled = IsVisibleP;
                 if(_gObject.GetComponent<SpriteRenderer>())

@@ -15,6 +15,7 @@ namespace ObjectScene
         /// </summary>
         private RaycastHit _rHit;
         private Vector3 _vNextPosition;
+      
 
         public override void Initialization (Weapons wepons, GameObject PointWepons)
         {
@@ -26,6 +27,7 @@ namespace ObjectScene
         private void FixedUpdate()
         {
             if (_IsHit) return;
+            if (_kWepons==null) return;
             _vNextPosition = transform.position + transform.forward * _kWepons._fSpeedBullet * Time.fixedDeltaTime;
             _IsHit=Physics.Linecast(transform.position, _vNextPosition,out _rHit);
 

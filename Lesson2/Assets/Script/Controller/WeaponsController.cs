@@ -27,14 +27,15 @@ namespace ObjectScene.Controller
             _kmWepons = FindObjectsOfType<Weapons>();
             for (int i=0; i < _kmWepons.Length; i++)
             {
-                _kmWepons[i]._IsVisible = i == _iCurentWepons;
+                _kmWepons[i]._IsVisible = i == _iCurentWepons;//Отключем не используемые видимость гейм обьектов оружия 
+               
             }
             //_eIsOnGetWepons+= delegate { };//Пустой метод на событие, что бы не вызывала ошибок
         }
         private void FixedUpdate()
         {
             if (_kmWepons[_iCurentWepons] == null) return;
-            if (_kmWepons[_iCurentWepons]._IsFire || _kmWepons[_iCurentWepons]._IsRecharge) _eIsOnGetWepons?.Invoke(_kmWepons[_iCurentWepons]);
+            if (_kmWepons[_iCurentWepons]._IsFire || _kmWepons[_iCurentWepons]._IsRecharge || (!_kmWepons[_iCurentWepons]._IsFire && !_kmWepons[_iCurentWepons]._IsRecharge)) _eIsOnGetWepons?.Invoke(_kmWepons[_iCurentWepons]);            
 
         }
 
@@ -47,14 +48,19 @@ namespace ObjectScene.Controller
         public void ChangeWepons()
         {
             _kmWepons[_iCurentWepons]._IsVisible = false;
+           
             if (_iCurentWepons == _kmWepons.Length-1) _iCurentWepons = 0;
             else _iCurentWepons++;
             _kmWepons[_iCurentWepons]._IsVisible = true;
+           
+
+            _eIsOnGetWepons?.Invoke(_kmWepons[_iCurentWepons]);//
         }
         public void ChangeWeponsScroll(bool next)
         {
 
             _kmWepons[_iCurentWepons]._IsVisible = false;//Выключаем видимость используемого
+           
             if (next)
             {
                 if (_iCurentWepons == _kmWepons.Length-1) _iCurentWepons = 0;
@@ -66,6 +72,9 @@ namespace ObjectScene.Controller
                 else _iCurentWepons--;
             }
             _kmWepons[_iCurentWepons]._IsVisible = true;//Включаем видимость следующего
+           
+
+            _eIsOnGetWepons?.Invoke(_kmWepons[_iCurentWepons]);//
         }
 
 

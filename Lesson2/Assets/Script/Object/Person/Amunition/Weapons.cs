@@ -53,7 +53,7 @@ namespace ObjectScene
             {
                 _aAudioShoot = GetComponent<AudioSource>();
             }
-            _fTimeLastFire = Time.time;
+            _fTimeLastFire = Time.time;            
         }
 
         public abstract void Fire();
